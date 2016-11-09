@@ -18,5 +18,12 @@ namespace School
        
 
         #endregion
+
+
+        //event handling
+        private void ok_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }
