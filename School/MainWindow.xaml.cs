@@ -83,6 +83,33 @@ namespace School
                         saveChanges.IsEnabled = true;
                     }
                     break;
+
+
+                // if the the user pressed Insert create new StudentForm 
+                case Key.Insert : sf = new StudentForm();
+                    sf.Title = "New student for Class" + teacher.Class;
+                    
+                    //display the from
+                    if (sf.ShowDialog().Value)
+                    {
+                        //creates new object
+                        Student newStudent = new Student();
+                        newStudent.FirstName = sf.firstName.Text;
+                        newStudent.LastName = sf.lastName.Text;
+                        newStudent.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text);
+                        newStudent.Teacher = this.teacher; //assign student to current teacher
+                        saveChanges.IsEnabled = true;
+                    }
+                    break;
+
+                case Key.Delete: student = this.studentsList.SelectedItem as Student;
+                    MessageBoxResult mbr = MessageBox.Show(string.Format("Remove {0}", student.FirstName + " " + student.LastName +"?"),
+                        "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                    saveChanges.IsEnabled = true;
+                    schoolContext.Students.DeleteObject(student);
+                    break;
+
+
             }
         }
 
@@ -100,6 +127,8 @@ namespace School
         }
 
         #endregion
+
+        
     }
 
     [ValueConversion(typeof(string), typeof(Decimal))]
@@ -108,7 +137,19 @@ namespace School
         public object Convert(object value, Type targetType, object parameter,
                               System.Globalization.CultureInfo culture)
         {
-            return "";
+            if (value != null)
+            {
+                DateTime studentDOB = (DateTime)value; //casting value to DateTime obj
+                TimeSpan diff = DateTime.Now - studentDOB; //calculates difference
+                int age = (int)diff.Days / 365; // calculates age
+
+                return age;
+            }
+            else
+            {
+                return "";
+            }
+
         }
 
         #region Predefined code
