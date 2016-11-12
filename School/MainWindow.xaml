@@ -17,7 +17,7 @@
     </Window.Resources>
     <Grid>
         <ComboBox Height="23" HorizontalAlignment="Stretch" Margin="40,16,42,0" x:Name="teachersList" VerticalAlignment="Top" Width="Auto" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource ClassTemplate}" SelectionChanged="teachersList_SelectionChanged" />
-        <ListView Height="Auto" HorizontalAlignment="Stretch" Margin="40,44,40,60" x:Name="studentsList" VerticalAlignment="Stretch" Width="Auto" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" KeyDown="studentsList_KeyDown" MouseDoubleClick="studentsList_MouseDoubleClick" SelectionChanged="studentsList_SelectionChanged">
+        <ListView Height="Auto" HorizontalAlignment="Stretch" Margin="40,44,40,60" x:Name="studentsList" VerticalAlignment="Stretch" Width="Auto" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" KeyDown="studentsList_KeyDown" MouseDoubleClick="studentsList_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
